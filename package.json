@@ -1,0 +1,26 @@
+{
+  "name": "draftsimulator",
+  "version": "1.0.0",
+  "description": "nhl draft lottery simulator",
+  "main": "sim.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dleard/draftSim.git"
+  },
+  "keywords": [
+    "nhl",
+    "draft",
+    "lottery"
+  ],
+  "author": "Dylan Leard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dleard/draftSim/issues"
+  },
+  "homepage": "https://github.com/dleard/draftSim#readme"
+}

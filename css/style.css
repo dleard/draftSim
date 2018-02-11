@@ -1,0 +1,139 @@
+body{
+    font: 15px/1.5 Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin:auto;
+    background-color: #f4f4f4;
+  }
+  
+  .container{
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+  }
+  
+  ul{
+    margin: 0;
+    padding: 0;
+  }
+
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Navbar */
+.navbar{
+    background: #353637;
+    color: #ffffff;
+    padding-top: 30px;
+    min-height: 70px;
+    position: fixed;
+    width: 100%;
+    border-bottom: #32a0c2 3px solid;
+  }
+  
+  .navbar a{
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+  }
+  
+  .navbar li{
+    float: left;
+    display: inline;
+    padding: 0 20px 0 20px;
+  }
+  
+  .navbar #branding{
+    float: left;
+  }
+  
+  .navbar #branding h1{
+    margin: 0;
+  }
+  
+  .navbar nav{
+    float: right;
+    margin-top: 10px;
+  }
+  
+  .navbar .highlight, .navbar .current a{
+    color: #32a0c2;
+    font-weight: bold;
+  }
+  
+  .navbar a:hover{
+    color: #cccccc;
+    font-weight: bold;
+  }  
+
+/* Showcase */
+
+#showcase {
+    min-height: 760px;
+    background:url('../img/keyboard.jpeg') no-repeat center;
+    background-size: cover;
+    text-align: right;
+    color: #ffffff;
+  }
+  
+  #showcase h1{
+    margin-top: 500px;
+    margin-left: 500px;
+    font-size: 55px;
+    margin-bottom: 10px;
+  }
+  
+  #showcase p{
+    font-size: 20px;
+    margin-left: 500px;
+  }  
+
+  /*footer{
+    padding: 2px;
+    margin-top: 20px;
+    color: #ffffff;
+    background-color: #32a0c2;
+    text-align: center;
+  }*/
+
+#simulator {
+    min-height: 760px;
+    background:white;
+    background-size: cover;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  #simulator h1{
+    margin-top: 500px;
+    margin-left: 500px;
+    font-size: 55px;
+    margin-bottom: 10px;
+    color:black;
+  }
+  
+  #simulator p{
+    font-size: 20px;
+    margin-left: 500px;
+    color:black;
+  }  
+
+  .content {
+    width: 850px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.page-title {
+    margin-top: 200px;
+    margin-bottom: 10px;
+    padding: 6px 0;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 300;
+    border-top: 2px solid #2E9FD3;
+    border-bottom: 2px solid #2E9FD3;
+}
