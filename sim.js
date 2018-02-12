@@ -3,7 +3,7 @@
 // Import the dependencies
 const cheerio = require("cheerio")
     , req = require("tinyreq")
-    ;
+    
 
 // Define the scrape function
 function scrape(url, data, cb) {
@@ -14,15 +14,15 @@ function scrape(url, data, cb) {
         // 2. Parse the HTML
         let $ = cheerio.load(body)
           , pageData = {}
-          ;
+          
 
         // 3. Extract the data
         Object.keys(data).forEach(k => {
-            pageData[k] = $(data[k]).text();
-        });
+            pageData[k] = $(data[k]).text()
+        })
 
         // Send the data in the callback
-        cb(null, pageData);
+        cb(null, pageData)
     });
 }
 
@@ -32,9 +32,9 @@ function cleanData(data) {
     
     // Remove 'noise data'
     const re = /(("name".*\s)|("points".*)|(wildCardRank.*))/g
-    let match;
+    let match
     while ((match = re.exec(data.apiData)) !== null) {
-        matches.push(match[0]);
+        matches.push(match[0])
         //console.log(match[0])
     }
     
@@ -48,10 +48,10 @@ function cleanData(data) {
     
     /* !These matches should have been cleaned by the second regex...but aren't for some reason. 
         Look into this when refactoring! */
-    matches.splice(0,1);
-    matches.splice(24,1);
-    matches.splice(48,1);
-    matches.splice(69,1);
+    matches.splice(0,1)
+    matches.splice(24,1)
+    matches.splice(48,1)
+    matches.splice(69,1)
     
     // Remove all extraneous characters
     const re3 = /"[^\d]\w+" : / 
@@ -69,22 +69,22 @@ function cleanData(data) {
 //sort teams into proper standings & remove current playoff teams
 function sortStandings(array) {
     const combined = []
-    const chunk=3;
+    const chunk=3
     for(let i=0; i<array.length-2; i+=chunk) {
         const tempArray = []
         for (let j=i; j<(i+chunk); j++) tempArray.push(array[j])
             if(parseInt(tempArray[2]) > 2) combined.push(tempArray)    
     }
     
-    return combined.sort(sortFunction);
+    return combined.sort(sortFunction)
     
     //sort function
     function sortFunction(a, b) {
-        if (a[1] === b[1] && a[2] < b[2]) {
-            return -1;
+        if (a[1] === b[1] && a[2] > b[2]) {
+            return -1
         }
         else {
-        return (a[1] < b[1]) ? -1 : 1;
+        return (a[1] < b[1]) ? -1 : 1
         }
     }
 }    
@@ -100,5 +100,5 @@ scrape("https://statsapi.web.nhl.com/api/v1/standings", {
     //sorted by standings
     const currentStandings = sortStandings(dataArray)
     
-    console.log(err || currentStandings);
-});
+    console.log(err || currentStandings)
+})
