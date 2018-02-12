@@ -84,7 +84,7 @@ function sortStandings(array) {
            combined[i].push(odds[i], ranges[i])       
     }
     return combined
-    
+
     //sort function
     function sortFunction(a, b) {
         if (a[1] === b[1] && a[2] > b[2]) {
@@ -95,6 +95,55 @@ function sortStandings(array) {
         }
     }
 }    
+
+function simLottery(original){
+    let first 
+    let second
+    let third
+    let draw = 0
+    const draftOrder = original
+    for (let i=0; i<3; i++){
+        if (first === undefined){
+            draw = Math.floor(Math.random() * 1000 + 1)
+            for(let i=0; i<original.length; i++){
+                if(draw >= original[i][4][0] && draw <= original[i][4][1]) first = original[i]
+            }
+            console.log(first)
+            console.log(draw)
+        }
+        else if (second === undefined){
+            draw = Math.floor(Math.random() * 1000 + 1)
+            while(draw >= first[4][0] && draw <= first[4][1]) draw = Math.floor(Math.random() * 1000 + 1)
+            for(let i=0; i<original.length; i++){
+                if(draw >= original[i][4][0] && draw <= original[i][4][1]) second = original[i]
+            }
+            console.log(second)
+            console.log(draw)
+        }
+        else {
+            draw = Math.floor(Math.random() * 1000 + 1)
+            while((draw >= first[4][0] && draw <= first[4][1])
+            || (draw >= second[4][0] && draw <= second[4][1])) draw = Math.floor(Math.random() * 1000 + 1)
+            for(let i=0; i<original.length; i++){
+                if(draw >= original[i][4][0] && draw <= original[i][4][1]) third = original[i]
+            }
+            console.log(third)
+            console.log(draw)
+        }
+    }
+    
+    const lotteryPicks = [third, second, first]
+    for (let i=2; i>=0; i--){
+        const index = draftOrder.indexOf(lotteryPicks[i])
+        console.log(index)
+        draftOrder.splice(index,1)
+        draftOrder.unshift(lotteryPicks[i])
+    }
+    for (let i=0; i<3; i++) console.log("Winner Pick ", i+1, ": ", lotteryPicks[i][0])
+    console.log('\nNew Draft Order\n')
+    for (let i=0; i<9; i++) console.log(i+1, ' :', draftOrder[i][0])
+    for (let i=9; i<draftOrder.length; i++) console.log(i+1, ':', draftOrder[i][0])
+}
 
 // Extract data from NHL.com
 scrape("https://statsapi.web.nhl.com/api/v1/standings", {
@@ -107,5 +156,6 @@ scrape("https://statsapi.web.nhl.com/api/v1/standings", {
     //sorted by standings
     const currentStandings = sortStandings(dataArray)
     
-    console.log(err || currentStandings)
+    simLottery(currentStandings)
+    //console.log(err || currentStandings)
 })
