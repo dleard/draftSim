@@ -95,7 +95,7 @@ function sortStandings(array) {
         }
     }
 }    
-
+//takes the current NHL standings and applies the draft lottery odds to each team then simulates the draft lottery
 function simLottery(original){
     let first 
     let second
@@ -103,32 +103,26 @@ function simLottery(original){
     let draw = 0
     const draftOrder = original
     for (let i=0; i<3; i++){
+        draw = Math.floor(Math.random() * 1000 + 1)
         if (first === undefined){
-            draw = Math.floor(Math.random() * 1000 + 1)
             for(let i=0; i<original.length; i++){
                 if(draw >= original[i][4][0] && draw <= original[i][4][1]) first = original[i]
             }
-            console.log(first)
-            console.log(draw)
         }
         else if (second === undefined){
-            draw = Math.floor(Math.random() * 1000 + 1)
+            //re-do draw if drawn number is within first pick's range
             while(draw >= first[4][0] && draw <= first[4][1]) draw = Math.floor(Math.random() * 1000 + 1)
             for(let i=0; i<original.length; i++){
                 if(draw >= original[i][4][0] && draw <= original[i][4][1]) second = original[i]
             }
-            console.log(second)
-            console.log(draw)
         }
         else {
-            draw = Math.floor(Math.random() * 1000 + 1)
+            //re-do draw if drawn number is within first or second pick's range
             while((draw >= first[4][0] && draw <= first[4][1])
             || (draw >= second[4][0] && draw <= second[4][1])) draw = Math.floor(Math.random() * 1000 + 1)
             for(let i=0; i<original.length; i++){
                 if(draw >= original[i][4][0] && draw <= original[i][4][1]) third = original[i]
             }
-            console.log(third)
-            console.log(draw)
         }
     }
     
@@ -156,6 +150,7 @@ scrape("https://statsapi.web.nhl.com/api/v1/standings", {
     //sorted by standings
     const currentStandings = sortStandings(dataArray)
     
+    //simulate lottery
     simLottery(currentStandings)
-    //console.log(err || currentStandings)
+    if (err) console.log(err)
 })
