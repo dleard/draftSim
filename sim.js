@@ -76,7 +76,14 @@ function sortStandings(array) {
             if(parseInt(tempArray[2]) > 2) combined.push(tempArray)    
     }
     
-    return combined.sort(sortFunction)
+    //add ranges & odds for lottery selections
+    const ranges = [[1,180], [181, 305], [306,410], [411,505], [506,590], [591,666], [667,733], [734,791], [792,845], [846,890], [891,923], [924,950], [951,972], [972,990], [991,1000]]
+    const odds = [18.0, 12.5, 10.5, 9.5, 8.5, 7.6, 6.7, 5.8, 5.4, 4.5, 3.3, 2.7, 2.2, 1.8, 1.0]
+    combined.sort(sortFunction)
+    for(let i=0; i<combined.length; i++){
+           combined[i].push(odds[i], ranges[i])       
+    }
+    return combined
     
     //sort function
     function sortFunction(a, b) {
