@@ -157,8 +157,7 @@ function simLottery(original){
         draftOrder.splice(index,1)
         draftOrder.unshift(lotteryPicks[i])
     }
-    console.log(draftOrder.indexOf(lotteryPicks[0]))
-    console.log(original.indexOf(lotteryPicks[0]))
+    
     for (let i=0; i<3; i++) console.log("Winner Pick ", i+1, ": ", lotteryPicks[i][0], "    Original Position: ", original.indexOf(lotteryPicks[i])+1)
     console.log('\nNew Draft Order\n')
     for (let i=0; i<9; i++) console.log(i+1, ' :', draftOrder[i][0])
