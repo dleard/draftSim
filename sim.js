@@ -1,3 +1,12 @@
+/**
+ * draftSimulator scrapes the NHL stats api & gets all current team data. It then pulls the data necessary for 
+ * simulating this year's NHL draft lottery, cleans it and orders it into reverse NHL standings (removing playoff teams). 
+ * The NHL draft lottery is done with ping pong balls with teams owning a range, draftSimulator adds the ranges and 
+ * matches a random number between 1 & 1000 with those ranges to choose the winners of picks 1-3. The winners
+ * and the new draft order are then printed to console. A page like tankathon.com\nhl or nhldraftlotterysimulator.com
+ * is the end goal.
+ */
+
 "use strict"
 
 // Import the dependencies
