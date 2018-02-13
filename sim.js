@@ -5,28 +5,32 @@ const cheerio = require("cheerio")
     , req = require("tinyreq")
     
 
-// Define the scrape function
+/**
+ * Scrapes the given url
+ * @param {string} url - the url
+ * @param {object} data - extracted data
+ * @param {function} cb - callback
+ */
 function scrape(url, data, cb) {
-    // 1. Create the request
     req(url, (err, body) => {
         if (err) { return cb(err); }
 
-        // 2. Parse the HTML
         let $ = cheerio.load(body)
           , pageData = {}
           
-
-        // 3. Extract the data
         Object.keys(data).forEach(k => {
             pageData[k] = $(data[k]).text()
         })
 
-        // Send the data in the callback
         cb(null, pageData)
-    });
+    })
 }
 
-//clean up data & put into array
+/**
+ * clean up data & put into array
+ * @param {array} data - data from page scrape
+ * @return {array} matches - matched data (cleaned)
+ */
 function cleanData(data) {
     const matches = []
     
@@ -35,7 +39,6 @@ function cleanData(data) {
     let match
     while ((match = re.exec(data.apiData)) !== null) {
         matches.push(match[0])
-        //console.log(match[0])
     }
     
     // Remove more noise data (too close to needed data & not caught by first clean) 
@@ -66,7 +69,11 @@ function cleanData(data) {
     return matches
 }
 
-//sort teams into proper standings & remove current playoff teams
+/**
+ * sort the data into NHL standings
+ * @param {array} array - cleaned data to be sorted into standings
+ * @return {array} combined - standings sorted worst to best with odds and lottery ranges
+ */
 function sortStandings(array) {
     const combined = []
     const chunk=3
@@ -95,7 +102,10 @@ function sortStandings(array) {
         }
     }
 }    
-//takes the current NHL standings and applies the draft lottery odds to each team then simulates the draft lottery
+/**
+ * takes the current NHL standings and applies the draft lottery odds to each team then simulates the draft lottery
+ * @param {array} original - original standings (before simulating draft lottery)
+ */
 function simLottery(original){
     let first 
     let second
@@ -139,7 +149,9 @@ function simLottery(original){
     for (let i=9; i<draftOrder.length; i++) console.log(i+1, ':', draftOrder[i][0])
 }
 
-// Extract data from NHL.com
+/**
+ * Extract data from NHL.com
+ */
 scrape("https://statsapi.web.nhl.com/api/v1/standings", {
     // Get the NHL api data 
     apiData: "body"
