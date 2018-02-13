@@ -137,9 +137,9 @@ function simLottery(original){
     }
     
     const lotteryPicks = [third, second, first]
+    //remove lottery picks from standings and append to front of draft order
     for (let i=2; i>=0; i--){
         const index = draftOrder.indexOf(lotteryPicks[i])
-        console.log(index)
         draftOrder.splice(index,1)
         draftOrder.unshift(lotteryPicks[i])
     }
