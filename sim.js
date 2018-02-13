@@ -120,13 +120,17 @@ function simLottery(original){
     let second
     let third
     let draw = 0
-    const draftOrder = original
+    const draftOrder = []
+    for (let i=0; i<original.length; i++){
+        draftOrder.push(original[i])
+    }
     for (let i=0; i<3; i++){
         draw = Math.floor(Math.random() * 1000 + 1)
         if (first === undefined){
             for(let i=0; i<original.length; i++){
                 if(draw >= original[i][4][0] && draw <= original[i][4][1]) first = original[i]
             }
+            console.log(first)
         }
         else if (second === undefined){
             //re-do draw if drawn number is within first pick's range
@@ -145,14 +149,17 @@ function simLottery(original){
         }
     }
     
-    const lotteryPicks = [third, second, first]
+    const lotteryPicks = [first, second, third]
+    const diff = []
     //remove lottery picks from standings and append to front of draft order
     for (let i=2; i>=0; i--){
         const index = draftOrder.indexOf(lotteryPicks[i])
         draftOrder.splice(index,1)
         draftOrder.unshift(lotteryPicks[i])
     }
-    for (let i=0; i<3; i++) console.log("Winner Pick ", i+1, ": ", lotteryPicks[i][0])
+    console.log(draftOrder.indexOf(lotteryPicks[0]))
+    console.log(original.indexOf(lotteryPicks[0]))
+    for (let i=0; i<3; i++) console.log("Winner Pick ", i+1, ": ", lotteryPicks[i][0], "    Original Position: ", original.indexOf(lotteryPicks[i])+1)
     console.log('\nNew Draft Order\n')
     for (let i=0; i<9; i++) console.log(i+1, ' :', draftOrder[i][0])
     for (let i=9; i<draftOrder.length; i++) console.log(i+1, ':', draftOrder[i][0])
